@@ -1,0 +1,15 @@
+.card {
+    background: #fff;
+    width: 95%;
+    border-radius:90px;
+}
+
+
+@media only screen and (min-width: 766px) { 
+    .card {
+        background: #fff;
+        width: 70%;
+        border-radius:90px;
+        border-width: 2px;
+    }
+}
