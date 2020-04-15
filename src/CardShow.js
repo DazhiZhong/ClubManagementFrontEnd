@@ -12,7 +12,7 @@ class CardShow extends React.Component {
       <Row className={"justify-content-xs-center"}>
         {/* <Col xs={1}> </Col> */}
         <Col align="center">
-          <ManCard title={"myass"} text="9.18"></ManCard>
+          <ManCard title={"myass"} text="9.18" ></ManCard>
         </Col>
         {/* <Col xs={1}> </Col> */}
       </Row>

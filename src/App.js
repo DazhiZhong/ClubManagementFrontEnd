@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import Pipi from './Pipi';
 import './App.css';
+import MyProgressBar from './progressbar';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -81,6 +82,7 @@ class App extends React.Component {
           <ActionButton onClick={this.showPostModal}></ActionButton>
           <UserModal show={this.state.showModal} closeModal={this.closeModal}></UserModal>
           <PostModal show={this.state.showPostModal} closeModal={this.closePostModal}></PostModal>
+          <MyProgressBar progress={10}></MyProgressBar>
         </body>
     );
   }
