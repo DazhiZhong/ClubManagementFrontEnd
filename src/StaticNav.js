@@ -6,9 +6,9 @@ export function StaticNav(props) {
     <Navbar.Toggle />
     <Navbar.Collapse className="justify-content-end">
       <Navbar.Text>
-        My sheer ass is breaking
+        {props.navText}
       </Navbar.Text>
-      <Button variant={'primary'} style={{marginLeft:10}} onClick={props.onClickButton}> Login </Button>
+      <Button variant={'primary'} style={{marginLeft:10}} onClick={props.onClickButton}> {!props.login && "Login"} {props.login && "Logout"} </Button>
     </Navbar.Collapse>
   </Navbar>);
 }

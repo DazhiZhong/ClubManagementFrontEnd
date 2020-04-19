@@ -34,9 +34,11 @@ class App extends React.Component {
       ButtonText: "help me wit a click",
       showModal:false,
       showPostModal:false,
-      cards: []
+      cards: [],
+      login: false,
+      navText: "Sans",
     };
-    this.ChangeText = this.ChangeText.bind(this);
+
 
   }
 
@@ -49,7 +51,16 @@ class App extends React.Component {
     this.setState({showModal:false})
   }
   showModal=()=>{
+    if (this.state.login) {
+      /*
+      actual server side implemenattion of logging out
+      axios.get('logout/')
+      sth like that
+      */
+      this.setState({login:false})
+    } else {
     this.setState({showModal:true})
+    }
   }
   closePostModal=()=>{
     this.setState({showPostModal:false})
@@ -58,6 +69,12 @@ class App extends React.Component {
   showPostModal=()=>{
     this.setState({showPostModal:true})
   }
+
+  authFail = () => {
+    this.closePostModal();
+    this.showModal();
+  }
+
   componentDidMount = () => {
     // send to ask if user is verified
 
@@ -70,19 +87,16 @@ class App extends React.Component {
 
   }
 
-  ChangeText () {
-    // this.setState({ButtonText: "help me with a click"});
-  }
 
   render () {
     return (
         <body>
-          <StaticNav onClickButton={this.showModal}></StaticNav>
+          <StaticNav onClickButton={this.showModal} login={this.state.login} navText={this.state.navText}></StaticNav>
           <CardShow></CardShow>
           <ActionButton onClick={this.showPostModal}></ActionButton>
           <UserModal show={this.state.showModal} closeModal={this.closeModal}></UserModal>
-          <PostModal show={this.state.showPostModal} closeModal={this.closePostModal}></PostModal>
-          <MyProgressBar progress={10}></MyProgressBar>
+          <PostModal show={this.state.showPostModal} closeModal={this.closePostModal} authFail={this.authFail}></PostModal>
+          {/* <MyProgressBar progress={10}></MyProgressBar> */}
         </body>
     );
   }

@@ -3,24 +3,59 @@ import { Container, Row, Col,Modal,Button,Form,Badge } from 'react-bootstrap';
 class UserModal extends React.Component {
   constructor(props){
     super(props)
-    // this.state = { 
-    //   showModal:props.showModal
-    //  }
+
+    this.state = {
+      logIn:true,
+      signUp:false,
+      
+    }
   }
   componentDidMount(){
 
+  }
+
+  uploadContent = () => {
+    this.props.closeModal()
+  }
+
+  switchLogInSignUp =  () => {
+    this.setState((p) => {
+      return {
+        logIn:p.signUp,
+        signUp:p.logIn
+      }
+    })
+
+  } 
+
+  pillVariant = () => {
+    if (this.state.logIn) {
+      return (
+        <>
+        <Badge pill variant={'light'} style={{marginRight:10, color:'#777'}} as={'span'}>Log In</Badge>
+        <Badge pill  variant={'primary'}  as={'button'} onClick={this.switchLogInSignUp}>Sign Up</Badge>
+        </>
+      )
+    } else {
+      return (
+        <>
+        <Badge pill variant={'primary'}  as={'button'} onClick={this.switchLogInSignUp} >Log In</Badge>
+        <Badge pill variant={'light'} style={{marginRight:10, color:'#777'}} as={'span'}  >Sign Up</Badge>
+        </>
+      )
+    }
   }
 
   render(){
     return(
       <Modal show={this.props.show} onHide={this.props.closeModal}>
         <Modal.Header closeButton>
-          <Modal.Title>{'Logging In'}</Modal.Title>
+          {this.state.logIn && <Modal.Title>Logging In</Modal.Title>}
+          {this.state.signUp && <Modal.Title>Signing Up</Modal.Title>}
         </Modal.Header>
         <Modal.Body>
           <Container style={{marginBottom:10}}>
-            <Badge pill border={'dark'} variant={'light'} style={{marginRight:10, color:'#777'}} as={'span'}>Log In</Badge>
-            <Badge pill border={'light'} variant={'dark'}  as={'button'}>Sign Up</Badge>
+            {this.pillVariant()}
           </Container>
           <Form>
             <Form.Label>UserName</Form.Label>
@@ -30,7 +65,7 @@ class UserModal extends React.Component {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.props.closeModal}> Help </Button>
+          <Button onClick={this.uploadContent}> {this.state.logIn&& "Log In!"}{this.state.signUp && "Sign Up!"} </Button>
         </Modal.Footer>
       </Modal>
     )
