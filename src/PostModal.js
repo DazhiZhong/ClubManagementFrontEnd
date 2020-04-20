@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col,Modal,Button,Form,Badge } from 'react-bootstrap';
-import axios from 'axios'
+import {axios} from './axios'
 class PostModal extends React.Component {
   constructor(props){
     super(props)
@@ -24,13 +24,17 @@ class PostModal extends React.Component {
     var bodyFormData = new FormData();
     bodyFormData.set('message', this.state.message);
     bodyFormData.set('title', this.state.title);
+    bodyFormData.set('user', this.props.getUser());
+    bodyFormData.set('password', this.props.getPass());
     console.log(stuff)
     axios({method:'post',
       url:"http://127.0.0.1:8000/post_notice/",
       data:bodyFormData,
-      headers: {'Content-Type': 'form-data'}})
+      headers: {'Content-Type': 'form-data'},
+      })
     .then((response)=>{console.log(response)})
-    this.props.closeModal();
+    this.props.closeModal()
+    setTimeout(()=>{this.props.refresh()}, 500)
     
     
   }
